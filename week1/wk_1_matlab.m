@@ -39,18 +39,30 @@ t_train_hat_min = X_train(:,1:min_train_index)*...
 inv(X_train(:,1:min_train_index)'*X_train(:,1:min_train_index))*...
 X_train(:,1:min_train_index)'*t_train;
 
+t_train_hat_min_X_test = X_test(:,1:min_train_index)*...
+inv(X_train(:,1:min_train_index)'*X_train(:,1:min_train_index))*...
+X_train(:,1:min_train_index)'*t_train;
+
 t_test_hat_min = X_train(:,1:min_test_index)*...
+inv(X_train(:,1:min_test_index)'*X_train(:,1:min_test_index))*...
+X_train(:,1:min_test_index)'*t_train;
+
+t_test_hat_min_X_test = X_test(:,1:min_test_index)*...
 inv(X_train(:,1:min_test_index)'*X_train(:,1:min_test_index))*...
 X_train(:,1:min_test_index)'*t_train;
 
 subplot(2,2,3)
 plot(x_train, t_train,'og');
 hold on;
+plot(x_test, t_test,'or');
 plot(x_train,t_train_hat_min);
+plot(x_test,t_train_hat_min_X_test,'r');
 title('Minimum Train Error Model');
 
 subplot(2,2,4)
 plot(x_train, t_train,'og');
 hold on;
+plot(x_test, t_test,'or');
 plot(x_train,t_test_hat_min);
+plot(x_test,t_test_hat_min_X_test,'r');
 title('Minimum Test Error Model');
